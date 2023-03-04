@@ -1,4 +1,5 @@
 ﻿using ProfilesAPI.Interfaces;
+using ProfilesAPI.Migrations;
 using ProfilesAPI.Repositories;
 
 namespace ProfilesAPI;
@@ -15,7 +16,8 @@ public class StartUp
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<DbContext>();
-        services.AddScoped<IProfilesRepository, ProfilesRepository>();
+        services.AddSingleton<Database>();
+        services.AddScoped<IAccountsRepository, AccountsRepository>();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

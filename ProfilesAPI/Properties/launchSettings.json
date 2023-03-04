@@ -19,6 +19,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "DapperMigrations": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
