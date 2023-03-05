@@ -15,12 +15,12 @@ public class StartUp
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton<DbContext>();
-        services.AddSingleton<Database>();
-        services.AddScoped<IAccountsRepository, AccountsRepository>();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddSingleton<DbContext>();
+        services.AddSingleton<Database>();
+        services.AddScoped<IAccountsRepository, AccountsRepository>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
