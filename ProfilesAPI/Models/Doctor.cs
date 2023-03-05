@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 namespace ProfilesAPI.Models;
 
 [ExcludeFromCodeCoverage]
-public class Doctor : IdentityUser<Guid>
+public class Doctor //: IdentityUser<Guid>
 {
     public string FirstName { get; set; }
 

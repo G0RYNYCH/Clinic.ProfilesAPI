@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 namespace ProfilesAPI.Models;
 
 [ExcludeFromCodeCoverage]
-public class Account : IdentityUser<Guid>
+public class Account //: IdentityUser<Guid>
 {
     public string Email { get; set; }
 
