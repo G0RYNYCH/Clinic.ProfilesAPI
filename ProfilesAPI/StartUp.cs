@@ -49,6 +49,6 @@ public class StartUp
             endpoints.MapControllers();
         });
 
-        app.Migrate(Configuration.GetConnectionString("DbConnection"));
+        app.Migrate(Configuration.GetConnectionString("MasterDbConnection"));//Use MasterDbConnection, not DbConnection
     }
 }
