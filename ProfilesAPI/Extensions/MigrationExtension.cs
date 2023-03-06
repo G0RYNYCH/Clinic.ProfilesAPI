@@ -12,7 +12,7 @@ public static class MigrationExtension
         using var scope = app.ApplicationServices.CreateScope();
         var runner = scope.ServiceProvider.GetService<IMigrationRunner>();
         runner.ListMigrations();
-        runner.MigrateUp();
+        runner.MigrateUp();//to roll back changes use MigrateDown
 
         return app;
     }
