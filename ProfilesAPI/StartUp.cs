@@ -1,5 +1,7 @@
-﻿using ProfilesAPI.Interfaces;
-using ProfilesAPI.Migrations;
+﻿using System.Reflection;
+using FluentMigrator.Runner;
+using ProfilesAPI.Extensions;
+using ProfilesAPI.Interfaces;
 using ProfilesAPI.Repositories;
 
 namespace ProfilesAPI;
@@ -19,8 +21,15 @@ public class StartUp
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddSingleton<DbContext>();
-        services.AddSingleton<Database>();
         services.AddScoped<IAccountsRepository, AccountsRepository>();
+        services
+            .AddLogging(x => x.AddFluentMigratorConsole())
+            .AddFluentMigratorCore()
+            .ConfigureRunner(x => x
+                .AddSqlServer()
+                .WithGlobalConnectionString(Configuration.GetConnectionString("DbConnection"))
+                .ScanIn(Assembly.GetExecutingAssembly())
+            );
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,5 +48,7 @@ public class StartUp
         {
             endpoints.MapControllers();
         });
+
+        app.Migrate(Configuration.GetConnectionString("DbConnection"));
     }
 }

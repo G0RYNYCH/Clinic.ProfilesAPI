@@ -30,8 +30,8 @@ public class AccountsController : ControllerBase
         }
     }
     
-    [HttpGet]
-    public async Task<IActionResult> GetAccount(Guid id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAccount([FromRoute]Guid id)
     {
         try
         {

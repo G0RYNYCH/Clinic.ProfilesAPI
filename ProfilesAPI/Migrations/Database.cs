@@ -1,28 +1,21 @@
-﻿using Dapper;
-using ProfilesAPI.Repositories;
+﻿using System.Security;
+using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace ProfilesAPI.Migrations;
 
-public class Database
+public static class Database
 {
-    private readonly DbContext _dbContext;
-
-    public Database(DbContext dbContext)
+    public static void EnsureCreated(string connectionString, string name)
     {
-        _dbContext = dbContext;
-    }
-
-    public void CreateDatabase(string dbName)
-    {
-        var query = "SELECT * FROM sys.databases WHERE name = @name";
         var parameters = new DynamicParameters();
-        parameters.Add("Profiles", dbName);
-
-        using (var connection = _dbContext.CreateMasterConnection())
-        {
-            var records = connection.QueryAsync(query, parameters);
-            if (!records.Result.Any())
-                connection.ExecuteAsync($"CREATE DATABASE {dbName}");
-        }
+        parameters.Add("name", name);
+        
+        using var connection = new SqlConnection(connectionString);
+        connection.Open();
+        var records = connection.Query("SELECT * FROM sys.Databases WHERE name = @name", parameters);
+        if (!records.Any())
+            connection.Execute($"CREATE DATABASE {name}");
+        connection.Close();
     }
 }
