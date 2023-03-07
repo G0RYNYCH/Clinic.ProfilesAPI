@@ -7,7 +7,7 @@ public static class MigrationExtension
 {
     public static IApplicationBuilder Migrate(this IApplicationBuilder app, string connectionString)
     {
-        Database.EnsureCreated(connectionString, "Accounts");
+        Database.EnsureCreated(connectionString, "Profiles");
 
         using var scope = app.ApplicationServices.CreateScope();
         var runner = scope.ServiceProvider.GetService<IMigrationRunner>();

@@ -12,6 +12,10 @@ public class DbContext
     {
         _configuration = configuration;
     }
-    
-    public IDbConnection CreateConnection() => new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+
+    public IDbConnection CreateConnection()
+        => new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+
+    public IDbConnection CreateMasterConnection()
+        => new SqlConnection(_configuration.GetConnectionString("MasterDbConnection"));
 }
