@@ -21,6 +21,7 @@ public class StartUp
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddSingleton<DbContext>();
         services.AddScoped<IDoctorsRepository, DoctorsRepository>();
         services.AddScoped<IPatientsRepository, PatientsRepository>();

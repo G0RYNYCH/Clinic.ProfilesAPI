@@ -2,7 +2,7 @@
 
 namespace ProfilesAPI.Interfaces;
 
-public interface IDoctorsRepository
+public interface IDoctorsRepository : IRepositoryBase<Doctor>
 {
     Task<Doctor> GetDoctorByOfficeId(Guid id, CancellationToken cancellationToken);
     
