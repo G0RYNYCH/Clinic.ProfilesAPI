@@ -3,6 +3,7 @@ using FluentMigrator.Runner;
 using ProfilesAPI.Extensions;
 using ProfilesAPI.Interfaces;
 using ProfilesAPI.Repositories;
+using ProfilesAPI.Services;
 
 namespace ProfilesAPI;
 
@@ -21,7 +22,12 @@ public class StartUp
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddSingleton<DbContext>();
-        services.AddScoped<IAccountsRepository, AccountsRepository>();
+        services.AddScoped<IDoctorsRepository, DoctorsRepository>();
+        services.AddScoped<IPatientsRepository, PatientsRepository>();
+        services.AddScoped<IReceptionistsRepository, ReceptionistsRepository>();
+        services.AddScoped<IDoctorsService, DoctorsService>();
+        services.AddScoped<IPatientsService, PatientsService>();
+        services.AddScoped<IReceptionistsService, ReceptionistsService>();
         services
             .AddLogging(x => x.AddFluentMigratorConsole())
             .AddFluentMigratorCore()
