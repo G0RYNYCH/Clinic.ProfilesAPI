@@ -14,4 +14,8 @@ public class CreateDoctorDto
     public DateOnly DateOfBirth { get; set; }
 
     public int CareerStartYear { get; set; }
+    
+    public Guid SpeciallizationId { get; set; }
+
+    public Guid OfficeId { get; set; }
 }

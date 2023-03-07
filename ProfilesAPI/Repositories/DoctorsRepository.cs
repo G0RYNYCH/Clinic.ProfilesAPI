@@ -18,4 +18,11 @@ public class DoctorsRepository : RepositoryBase<Doctor>, IDoctorsRepository
     {
         throw new NotImplementedException();
     }
+    
+    public Task CreateAsync(Doctor doctor, CancellationToken cancellationToken)
+    {
+        // var query = "INSERT INTO Doctors (Id, FirstName, LastName, MiddleName, DateOfBirth, SpeciallizationId, )"
+            
+        throw new NotImplementedException();
+    }
 }
