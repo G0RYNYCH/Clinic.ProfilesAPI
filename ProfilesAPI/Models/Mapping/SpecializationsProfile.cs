@@ -7,7 +7,7 @@ public class SpecializationsProfile : Profile
 {
     public SpecializationsProfile()
     {
-        CreateMap<CreateSpecializationDto, Specialization>();
-        CreateMap<Specialization, CreateSpecializationDto>();
+        CreateMap<SpecializationDto, Specialization>();
+        CreateMap<Specialization, SpecializationDto>();
     }
 }

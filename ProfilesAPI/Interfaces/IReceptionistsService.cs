@@ -5,13 +5,13 @@ namespace ProfilesAPI.Interfaces;
 
 public interface IReceptionistsService
 {
-    Task<IEnumerable<Receptionist>> GetAllAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<Receptionist>> GetAllAsync(PaginationDto dto, CancellationToken cancellationToken);
 
-    Task<Receptionist> GetById(Guid id, CancellationToken cancellationToken);
+    Task<Receptionist> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    Task CreateAsync(CreateReceptionistDto receptionistDto, CancellationToken cancellationToken);
+    Task CreateAsync(ReceptionistDto dto, CancellationToken cancellationToken);
 
-    Task UpdateAsync(Guid id, CancellationToken cancellationToken);
+    Task UpdateAsync(ReceptionistDto dto, CancellationToken cancellationToken);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

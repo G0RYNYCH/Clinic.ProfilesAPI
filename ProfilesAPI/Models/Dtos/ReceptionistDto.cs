@@ -1,6 +1,6 @@
 ﻿namespace ProfilesAPI.Models.Dtos;
 
-public class CreateReceptionistDto
+public class ReceptionistDto
 {
     public string FirstName { get; set; }
 

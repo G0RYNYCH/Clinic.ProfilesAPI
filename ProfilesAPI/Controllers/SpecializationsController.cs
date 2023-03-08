@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProfilesAPI.Interfaces;
-using ProfilesAPI.Models;
 using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Controllers;
@@ -17,7 +16,7 @@ public class SpecializationsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateSpecializationDto dto)
+    public async Task<IActionResult> Create([FromBody] SpecializationDto dto)
     {
         await _service.CreateAsync(dto, HttpContext.RequestAborted);
 
