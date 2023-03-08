@@ -3,9 +3,9 @@ using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Models.Mapping;
 
-public class SpecializationProfile : Profile
+public class SpecializationsProfile : Profile
 {
-    protected SpecializationProfile()
+    public SpecializationsProfile()
     {
         CreateMap<CreateSpecializationDto, Specialization>();
         CreateMap<Specialization, CreateSpecializationDto>();

@@ -22,7 +22,7 @@ public class Migration_2023030717400000 : Migration
             .WithColumn("AccountId").AsGuid().Nullable()
             .WithColumn("FirstName").AsString().NotNullable()
             .WithColumn("LastName").AsString().NotNullable()
-            .WithColumn("MiddleName").AsString().NotNullable()
+            .WithColumn("MiddleName").AsString().NotNullable() //TODO: can be null
             .WithColumn("DateOfBirth").AsDate().NotNullable()
             .WithColumn("SpeciallizationId").AsGuid().NotNullable().ForeignKey("Specializations", "Id")
             .WithColumn("OfficeId").AsGuid().Nullable()

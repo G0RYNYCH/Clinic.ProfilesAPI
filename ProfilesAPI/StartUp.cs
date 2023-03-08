@@ -21,14 +21,18 @@ public class StartUp
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddSingleton<DbContext>();
+        //services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IDoctorsRepository, DoctorsRepository>();
-        services.AddScoped<IPatientsRepository, PatientsRepository>();
-        services.AddScoped<IReceptionistsRepository, ReceptionistsRepository>();
         services.AddScoped<IDoctorsService, DoctorsService>();
+        services.AddScoped<IPatientsRepository, PatientsRepository>();
         services.AddScoped<IPatientsService, PatientsService>();
+        services.AddScoped<IReceptionistsRepository, ReceptionistsRepository>();
         services.AddScoped<IReceptionistsService, ReceptionistsService>();
+        services.AddScoped<ISpecializationsRepository, SpecializationsRepository>();
+        services.AddScoped<ISpecializationsService, SpecializationsService>();
+        //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddAutoMapper(typeof(StartUp));
         services
             .AddLogging(x => x.AddFluentMigratorConsole())
             .AddFluentMigratorCore()
