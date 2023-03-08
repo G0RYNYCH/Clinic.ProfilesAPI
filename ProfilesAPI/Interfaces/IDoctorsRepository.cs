@@ -4,7 +4,11 @@ namespace ProfilesAPI.Interfaces;
 
 public interface IDoctorsRepository : IRepositoryBase<Doctor>
 {
-    Task<Doctor> GetDoctorByOfficeId(Guid id, CancellationToken cancellationToken);
+    Task<IEnumerable<Doctor>> GetDoctorsByOfficeId(Guid id, CancellationToken cancellationToken);
     
-    Task<Doctor> GetDoctorBySpecializationId(Guid id, CancellationToken cancellationToken);
+    Task<IEnumerable<Doctor>> GetDoctorsBySpecializationId(Guid id, CancellationToken cancellationToken);
+
+    Task CreateAsync(Doctor doctor, CancellationToken cancellationToken);
+
+    Task UpdateAsync(Doctor entity, CancellationToken cancellationToken);
 }
