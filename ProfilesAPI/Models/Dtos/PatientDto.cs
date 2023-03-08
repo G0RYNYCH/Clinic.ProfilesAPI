@@ -3,7 +3,7 @@
 namespace ProfilesAPI.Models.Dtos;
 
 [ExcludeFromCodeCoverage]
-public class CreatePatientDto
+public class PatientDto
 {
     public string FirstName { get; set; }
 

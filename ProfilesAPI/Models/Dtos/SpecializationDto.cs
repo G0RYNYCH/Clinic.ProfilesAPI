@@ -1,6 +1,6 @@
 ﻿namespace ProfilesAPI.Models.Dtos;
 
-public class CreateSpecializationDto
+public class SpecializationDto
 {
     public string SpecializationName { get; set; }
 

@@ -1,43 +1,40 @@
-﻿using ProfilesAPI.Interfaces;
+﻿using AutoMapper;
+using ProfilesAPI.Interfaces;
 using ProfilesAPI.Models;
 using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Services;
 
-public class DoctorsService : IDoctorsService
+public class DoctorsService : ServiceBase<Doctor>, IDoctorsService
 {
-    public Task<IEnumerable<Doctor>> GetAllAsync(CancellationToken cancellationToken)
+    private readonly IDoctorsRepository _repository;
+    private readonly IMapper _mapper;
+
+    public DoctorsService(IDoctorsRepository repository, IMapper mapper) : base(repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+        _mapper = mapper;
     }
 
-    public Task<Doctor> GetDoctorByOfficeId(Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Doctor>> GetDoctorsByOfficeId(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _repository.GetDoctorsByOfficeId(id, cancellationToken);
     }
 
-    public Task<Doctor> GetDoctorBySpecializationId(Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Doctor>> GetDoctorsBySpecializationId(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _repository.GetDoctorsBySpecializationId(id, cancellationToken);
     }
 
-    public Task<Doctor> GetById(Guid id, CancellationToken cancellationToken)
+    public async Task CreateAsync(DoctorDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var doctor = _mapper.Map<DoctorDto, Doctor>(dto);
+        await _repository.CreateAsync(doctor, cancellationToken);
     }
 
-    public Task CreateAsync(CreateDoctorDto doctorDto, CancellationToken cancellationToken)
+    public async Task UpdateAsync(DoctorDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Guid id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        var doctor = _mapper.Map<DoctorDto, Doctor>(dto);
+        await _repository.UpdateAsync(doctor, cancellationToken);
     }
 }

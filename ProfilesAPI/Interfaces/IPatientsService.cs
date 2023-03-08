@@ -5,13 +5,13 @@ namespace ProfilesAPI.Interfaces;
 
 public interface IPatientsService
 {
-    Task<IEnumerable<Patient>> GetAllAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<Patient>> GetAllAsync(PaginationDto dto, CancellationToken cancellationToken);
 
-    Task<Patient> GetById(Guid id, CancellationToken cancellationToken);
-
-    Task CreateAsync(CreatePatientDto patientDto, CancellationToken cancellationToken);
-
-    Task UpdateAsync(Guid id, CancellationToken cancellationToken);
+    Task<Patient> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     
+    Task CreateAsync(PatientDto patientDto, CancellationToken cancellationToken);
+
+    Task UpdateAsync(PatientDto patientDto, CancellationToken cancellationToken);
+
     Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

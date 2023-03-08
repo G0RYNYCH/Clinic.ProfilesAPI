@@ -1,33 +1,30 @@
-﻿using ProfilesAPI.Interfaces;
+﻿using AutoMapper;
+using ProfilesAPI.Interfaces;
 using ProfilesAPI.Models;
 using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Services;
 
-public class PatientsService : IPatientsService
+public class PatientsService : ServiceBase<Patient>, IPatientsService
 {
-    public Task<IEnumerable<Patient>> GetAllAsync(CancellationToken cancellationToken)
+    private readonly IPatientsRepository _repository;
+    private readonly IMapper _mapper;
+
+    public PatientsService(IPatientsRepository repository, IMapper mapper) : base(repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+        _mapper = mapper;
     }
 
-    public Task<Patient> GetById(Guid id, CancellationToken cancellationToken)
+    public async Task CreateAsync(PatientDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var patient = _mapper.Map<PatientDto, Patient>(dto);
+        await _repository.CreateAsync(patient, cancellationToken);
     }
 
-    public Task CreateAsync(CreatePatientDto patientDto, CancellationToken cancellationToken)
+    public async Task UpdateAsync(PatientDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Guid id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        var patient = _mapper.Map<PatientDto, Patient>(dto);
+        await _repository.UpdateAsync(patient, cancellationToken);
     }
 }
