@@ -29,15 +29,32 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
     {
         var query = $"SELECT * FROM {_tableName} WHERE Id = {id}";
         using var connection = _dbContext.CreateConnection();
+        connection.Open();
         var result = await connection.QuerySingleOrDefaultAsync<T>(query);
-
+        connection.Close();
+        
         return result;
     }
 
-    // public Task CreateAsync(T entity, CancellationToken cancellationToken)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public async Task CreateAsync(T entity, CancellationToken cancellationToken)
+    {
+        var parameters = new DynamicParameters();
+        var columnNames = new List<string>();
+        var properties = typeof(T).GetProperties();
+
+        foreach (var property in properties)
+        {
+            parameters.Add(property.Name, property);
+            columnNames.Add(property.Name);
+        }
+        
+        var query = $"INSERT INTO {_tableName} () VALUES ()";
+
+        using var connection = _dbContext.CreateConnection();
+        connection.Open();
+        await connection.ExecuteAsync(query, parameters);
+        connection.Close();
+    }
 
     public Task UpdateAsync(Guid id, CancellationToken cancellationToken)
     {
