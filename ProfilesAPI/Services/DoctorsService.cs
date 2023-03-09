@@ -7,23 +7,18 @@ namespace ProfilesAPI.Services;
 
 public class DoctorsService : ServiceBase<Doctor>, IDoctorsService
 {
-    private readonly IDoctorsRepository _repository;
-    private readonly IMapper _mapper;
-
-    public DoctorsService(IDoctorsRepository repository, IMapper mapper) : base(repository)
+    public DoctorsService(IDoctorsRepository repository, IMapper mapper) : base(repository, mapper)
     {
-        _repository = repository;
-        _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Doctor>> GetDoctorsByOfficeId(Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Doctor>> GetDoctorsByOfficeIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _repository.GetDoctorsByOfficeId(id, cancellationToken);
+        return await _repository.GetDoctorsByOfficeIdAsync(id, cancellationToken);
     }
 
-    public async Task<IEnumerable<Doctor>> GetDoctorsBySpecializationId(Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Doctor>> GetDoctorsBySpecializationIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _repository.GetDoctorsBySpecializationId(id, cancellationToken);
+        return await _repository.GetDoctorsBySpecializationIdAsync(id, cancellationToken);
     }
 
     public async Task CreateAsync(DoctorDto dto, CancellationToken cancellationToken)
