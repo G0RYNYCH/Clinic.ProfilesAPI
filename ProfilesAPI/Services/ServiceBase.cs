@@ -4,12 +4,12 @@ using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Services;
 
-public abstract class ServiceBase<T, TDto> : IServiceBase<T>
+public abstract class ServiceBase<T, TDto, TRepository> : IServiceBase<T> where TRepository : IRepositoryBase<T>
 {
-    protected readonly IRepositoryBase<T> _repositoryBase;
+    protected TRepository _repositoryBase;
     protected readonly IMapper _mapper;
 
-    protected ServiceBase(IRepositoryBase<T> repositoryBase, IMapper mapper)
+    protected ServiceBase(TRepository repositoryBase, IMapper mapper)
     {
         _repositoryBase = repositoryBase;
         _mapper = mapper;
@@ -25,20 +25,20 @@ public abstract class ServiceBase<T, TDto> : IServiceBase<T>
         return await _repositoryBase.GetByIdAsync(id, cancellationToken);
     }
     
+    public virtual async Task CreateAsync(TDto dto, CancellationToken cancellationToken)
+    {
+        var entity = _mapper.Map<TDto, T>(dto);
+        await _repositoryBase.CreateAsync(entity, cancellationToken);
+    }
+    
+    public async Task UpdateAsync(TDto dto, CancellationToken cancellationToken)
+    {
+        var entity = _mapper.Map<TDto, T>(dto);
+        await _repositoryBase.UpdateAsync(entity, cancellationToken);
+    }
+    
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         await _repositoryBase.DeleteAsync(id, cancellationToken);
-    }
-    
-    public async Task CreateAsync(TDto dto, CancellationToken cancellationToken)
-    {
-        var doctor = _mapper.Map<TDto, T>(dto);
-        await _repository.CreateAsync(doctor, cancellationToken);
-    }
-
-    public async Task UpdateAsync(DoctorDto dto, CancellationToken cancellationToken)
-    {
-        var doctor = _mapper.Map<DoctorDto, Doctor>(dto);
-        await _repository.UpdateAsync(doctor, cancellationToken);
     }
 }

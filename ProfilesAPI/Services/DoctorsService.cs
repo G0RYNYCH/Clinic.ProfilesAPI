@@ -5,31 +5,32 @@ using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Services;
 
-public class DoctorsService : ServiceBase<Doctor>, IDoctorsService
+public class DoctorsService : 
+    ServiceBase<Doctor, DoctorDto, IDoctorsRepository>, 
+    IDoctorsService
 {
-    public DoctorsService(IDoctorsRepository repository, IMapper mapper) : base(repository, mapper)
+    public DoctorsService(IDoctorsRepository repository, IMapper mapper) : 
+        base(repository, mapper)
     {
     }
 
     public async Task<IEnumerable<Doctor>> GetDoctorsByOfficeIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _repository.GetDoctorsByOfficeIdAsync(id, cancellationToken);
+        return await _repositoryBase.GetDoctorsByOfficeIdAsync(id, cancellationToken);
     }
 
     public async Task<IEnumerable<Doctor>> GetDoctorsBySpecializationIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _repository.GetDoctorsBySpecializationIdAsync(id, cancellationToken);
+        return await _repositoryBase.GetDoctorsBySpecializationIdAsync(id, cancellationToken);
     }
-
-    public async Task CreateAsync(DoctorDto dto, CancellationToken cancellationToken)
+    
+    public override async Task CreateAsync(DoctorDto dto, CancellationToken cancellationToken)
     {
         var doctor = _mapper.Map<DoctorDto, Doctor>(dto);
-        await _repository.CreateAsync(doctor, cancellationToken);
-    }
-
-    public async Task UpdateAsync(DoctorDto dto, CancellationToken cancellationToken)
-    {
-        var doctor = _mapper.Map<DoctorDto, Doctor>(dto);
-        await _repository.UpdateAsync(doctor, cancellationToken);
+        doctor.Id = Guid.NewGuid();
+        doctor.SpeciallizationId = Guid.NewGuid();
+        doctor.OfficeId = Guid.NewGuid();
+        doctor.AccountId = Guid.NewGuid();
+        await _repositoryBase.CreateAsync(doctor, cancellationToken);
     }
 }

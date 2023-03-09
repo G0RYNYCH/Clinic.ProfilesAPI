@@ -10,7 +10,7 @@ public class ReceptionistsRepository : RepositoryBase<Receptionist>, IReceptioni
     {
     }
 
-    public async Task CreateAsync(Receptionist receptionist, CancellationToken cancellationToken)
+    public override async Task CreateAsync(Receptionist receptionist, CancellationToken cancellationToken)
     {
         var query = $"INSERT INTO {TableName} (Id, AccountId, FirstName, LastName, MiddleName, OfficeId) VALUES (@Id, @AccountId, @FirstName, @LastName, @MiddleName, @OfficeId)";
         using var connection = _dbContext.CreateConnection();
@@ -19,7 +19,7 @@ public class ReceptionistsRepository : RepositoryBase<Receptionist>, IReceptioni
         connection.Close();
     }
 
-    public async Task UpdateAsync(Receptionist receptionist, CancellationToken cancellationToken)
+    public override async Task UpdateAsync(Receptionist receptionist, CancellationToken cancellationToken)
     {
         var query = $"UPDATE {TableName} SET AccountId = @AccountId, FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, OfficeId = @OfficeId WHERE Id = @Id";
         using var connection = _dbContext.CreateConnection();

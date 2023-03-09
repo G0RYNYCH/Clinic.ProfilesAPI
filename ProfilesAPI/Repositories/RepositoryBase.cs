@@ -6,12 +6,13 @@ namespace ProfilesAPI.Repositories;
 
 public abstract class RepositoryBase<T> : IRepositoryBase<T>
 {
-    protected const string TableName = nameof(T) + "s";
+    protected readonly string TableName;
     protected readonly DbContext _dbContext;
 
     protected RepositoryBase(DbContext dbContext)
     {
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        TableName = typeof(T).Name + "s";
     }
 
     public async Task<IEnumerable<T>> GetAllAsync(PaginationDto dto, CancellationToken cancellationToken)
@@ -23,6 +24,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
         connection.Close();
 
         return result;
+        
     }
 
     public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -43,5 +45,15 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
         connection.Open();
         await connection.ExecuteAsync(query);
         connection.Close();
+    }
+
+    public virtual Task CreateAsync(T entity, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+    
+    public virtual Task UpdateAsync(T entity, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }

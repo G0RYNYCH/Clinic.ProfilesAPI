@@ -5,7 +5,7 @@ using ProfilesAPI.Models.Dtos;
 namespace ProfilesAPI.Controllers;
 
 [ApiController]
-[Route("api/doctors")]
+[Route("api/[controller]/[action]")]
 public class DoctorsController : ControllerBase
 {
     private readonly IDoctorsService _service;
