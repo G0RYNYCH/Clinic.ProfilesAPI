@@ -6,12 +6,8 @@ namespace ProfilesAPI.Repositories;
 
 public class PatientsRepository : RepositoryBase<Patient>, IPatientsRepository
 {
-    private const string TableName = "Patients";
-    private readonly DbContext _dbContext;
-
     public PatientsRepository(DbContext dbContext) : base(dbContext)
     {
-        _dbContext = dbContext;
     }
     
     public async Task CreateAsync(Patient patient, CancellationToken cancellationToken)

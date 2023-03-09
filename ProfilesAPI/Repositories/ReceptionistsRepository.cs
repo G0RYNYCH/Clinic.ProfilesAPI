@@ -6,12 +6,8 @@ namespace ProfilesAPI.Repositories;
 
 public class ReceptionistsRepository : RepositoryBase<Receptionist>, IReceptionistsRepository
 {
-    private const string TableName = "Receptionists";
-    private readonly DbContext _dbContext;
-    
     public ReceptionistsRepository(DbContext dbContext) : base(dbContext)
     {
-        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
     public async Task CreateAsync(Receptionist receptionist, CancellationToken cancellationToken)

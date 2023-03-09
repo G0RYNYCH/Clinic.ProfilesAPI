@@ -7,9 +7,9 @@ public interface IDoctorsService
 {
     Task<IEnumerable<Doctor>> GetAllAsync(PaginationDto dto, CancellationToken cancellationToken);
     
-    Task<IEnumerable<Doctor>> GetDoctorsByOfficeId(Guid id, CancellationToken cancellationToken);
+    Task<IEnumerable<Doctor>> GetDoctorsByOfficeIdAsync(Guid id, CancellationToken cancellationToken);
     
-    Task<IEnumerable<Doctor>> GetDoctorsBySpecializationId(Guid id, CancellationToken cancellationToken);
+    Task<IEnumerable<Doctor>> GetDoctorsBySpecializationIdAsync(Guid id, CancellationToken cancellationToken);
 
     Task<Doctor> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 

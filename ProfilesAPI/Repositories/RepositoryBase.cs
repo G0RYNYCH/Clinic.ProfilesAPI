@@ -6,8 +6,8 @@ namespace ProfilesAPI.Repositories;
 
 public abstract class RepositoryBase<T> : IRepositoryBase<T>
 {
-    private const string TableName = nameof(T) + "s";
-    private readonly DbContext _dbContext;
+    protected const string TableName = nameof(T) + "s";
+    protected readonly DbContext _dbContext;
 
     protected RepositoryBase(DbContext dbContext)
     {
@@ -44,24 +44,4 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
         await connection.ExecuteAsync(query);
         connection.Close();
     }
-
-    // public async Task CreateAsync(T entity, CancellationToken cancellationToken)
-    // {
-    //     var parameters = new DynamicParameters();
-    //     var columnNames = new List<string>();
-    //     var properties = typeof(T).GetProperties();
-    //
-    //     foreach (var property in properties)
-    //     {
-    //         parameters.Add(property.Name, property);
-    //         columnNames.Add(property.Name);
-    //     }
-    //
-    //     var query = $"INSERT INTO {_tableName} () VALUES ()";
-    //
-    //     using var connection = _dbContext.CreateConnection();
-    //     connection.Open();
-    //     await connection.ExecuteAsync(query, parameters);
-    //     connection.Close();
-    // }
 }
