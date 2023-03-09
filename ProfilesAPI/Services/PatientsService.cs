@@ -5,26 +5,20 @@ using ProfilesAPI.Models.Dtos;
 
 namespace ProfilesAPI.Services;
 
-public class PatientsService : ServiceBase<Patient>, IPatientsService
+public class PatientsService : 
+    ServiceBase<Patient, PatientDto, IPatientsRepository>, 
+    IPatientsService
 {
-    private readonly IPatientsRepository _repository;
-    private readonly IMapper _mapper;
-
-    public PatientsService(IPatientsRepository repository, IMapper mapper) : base(repository)
+    public PatientsService(IPatientsRepository repository, IMapper mapper) : 
+        base(repository, mapper)
     {
-        _repository = repository;
-        _mapper = mapper;
     }
-
-    public async Task CreateAsync(PatientDto dto, CancellationToken cancellationToken)
+    
+    public override async Task CreateAsync(PatientDto dto, CancellationToken cancellationToken)
     {
         var patient = _mapper.Map<PatientDto, Patient>(dto);
-        await _repository.CreateAsync(patient, cancellationToken);
-    }
-
-    public async Task UpdateAsync(PatientDto dto, CancellationToken cancellationToken)
-    {
-        var patient = _mapper.Map<PatientDto, Patient>(dto);
-        await _repository.UpdateAsync(patient, cancellationToken);
+        patient.Id = Guid.NewGuid();
+        patient.AccountId = Guid.NewGuid();
+        await _repositoryBase.CreateAsync(patient, cancellationToken);
     }
 }

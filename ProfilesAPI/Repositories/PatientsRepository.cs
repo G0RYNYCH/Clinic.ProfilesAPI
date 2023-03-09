@@ -10,7 +10,7 @@ public class PatientsRepository : RepositoryBase<Patient>, IPatientsRepository
     {
     }
     
-    public async Task CreateAsync(Patient patient, CancellationToken cancellationToken)
+    public override async Task CreateAsync(Patient patient, CancellationToken cancellationToken)
     {
         var query = $"INSERT INTO {TableName} (Id, AccountId, FirstName, LastName, MiddleName, DateOfBirth, IsLinkedToAccount) VALUES (@Id, @AccountId, @FirstName, @LastName, @MiddleName, @DateOfBirth, @IsLinkedToAccount)";
         using var connection = _dbContext.CreateConnection();
@@ -19,7 +19,7 @@ public class PatientsRepository : RepositoryBase<Patient>, IPatientsRepository
         connection.Close();
     }
 
-    public async Task UpdateAsync(Patient patient, CancellationToken cancellationToken)
+    public override async Task UpdateAsync(Patient patient, CancellationToken cancellationToken)
     {
         var query = $"UPDATE {TableName} SET AccountId = @AccountId, FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, DateOfBirth = @DateOfBirth, IsLinkedToAccount = @IsLinkedToAccount WHERE Id = @Id";
         using var connection = _dbContext.CreateConnection();

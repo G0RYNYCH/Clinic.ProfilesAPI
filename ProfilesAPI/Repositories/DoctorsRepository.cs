@@ -32,7 +32,7 @@ public class DoctorsRepository : RepositoryBase<Doctor>, IDoctorsRepository
         return doctors;
     }
 
-    public async Task CreateAsync(Doctor doctor, CancellationToken cancellationToken)
+    public override async Task CreateAsync(Doctor doctor, CancellationToken cancellationToken)
     {
         var query = $"INSERT INTO {TableName} (Id, AccountId, FirstName, LastName, MiddleName, DateOfBirth, SpeciallizationId, OfficeId, CareerStartYear, Status) VALUES (@Id, @AccountId, @FirstName, @LastName, @MiddleName, @DateOfBirth, @SpeciallizationId, @OfficeId, @CareerStartYear, @Status)";
         using var connection = _dbContext.CreateConnection();
@@ -41,7 +41,7 @@ public class DoctorsRepository : RepositoryBase<Doctor>, IDoctorsRepository
         connection.Close();
     }
 
-    public async Task UpdateAsync(Doctor doctor, CancellationToken cancellationToken)
+    public override async Task UpdateAsync(Doctor doctor, CancellationToken cancellationToken)
     {
         var query = $"UPDATE {TableName} SET AccountId = @AccountId, FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, DateOfBirth = @DateOfBirth, SpeciallizationId = @SpeciallizationId, OfficeId = @OfficeId, CareerStartYear = @CareerStartYear, Status = @Status WHERE Id = @Id";
         using var connection = _dbContext.CreateConnection();
