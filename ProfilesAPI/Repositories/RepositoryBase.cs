@@ -29,7 +29,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
 
     public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var query = $"SELECT * FROM {TableName} WHERE Id = {id}";
+        var query = $"SELECT * FROM {TableName} WHERE Id = '{id}'";
         using var connection = _dbContext.CreateConnection();
         connection.Open();
         var result = await connection.QuerySingleOrDefaultAsync<T>(query);
@@ -40,7 +40,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T>
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var query = $"DELETE FROM {TableName} WHERE Id = {id}";
+        var query = $"DELETE FROM {TableName} WHERE Id = '{id}'";
         using var connection = _dbContext.CreateConnection();
         connection.Open();
         await connection.ExecuteAsync(query);

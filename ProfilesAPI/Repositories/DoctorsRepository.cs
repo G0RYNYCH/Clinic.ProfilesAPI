@@ -12,7 +12,7 @@ public class DoctorsRepository : RepositoryBase<Doctor>, IDoctorsRepository
 
     public async Task<IEnumerable<Doctor>> GetDoctorsByOfficeIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var query = $"SELECT * FROM {TableName} WHERE OfficeId = {id}";
+        var query = $"SELECT * FROM {TableName} WHERE OfficeId = '{id}'";
         using var connection = _dbContext.CreateConnection();
         connection.Open();
         var doctors = await connection.QueryAsync<Doctor>(query);
@@ -23,7 +23,7 @@ public class DoctorsRepository : RepositoryBase<Doctor>, IDoctorsRepository
 
     public async Task<IEnumerable<Doctor>> GetDoctorsBySpecializationIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var query = $"SELECT * FROM {TableName} WHERE SpeciallizationId = {id}";
+        var query = $"SELECT * FROM {TableName} WHERE SpeciallizationId = '{id}'";
         using var connection = _dbContext.CreateConnection();
         connection.Open();
         var doctors = await connection.QueryAsync<Doctor>(query);

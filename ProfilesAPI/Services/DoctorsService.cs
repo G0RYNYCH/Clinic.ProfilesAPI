@@ -32,5 +32,9 @@ public class DoctorsService :
         doctor.OfficeId = Guid.NewGuid();
         doctor.AccountId = Guid.NewGuid();
         await _repositoryBase.CreateAsync(doctor, cancellationToken);
+        
+        //add specialization repo
+        //duplicate check!!!
+        //check relations
     }
 }
