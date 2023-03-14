@@ -8,6 +8,7 @@ public static class Database
 {
     public static void EnsureCreated(string connectionString, string name)
     {
+        Console.WriteLine(connectionString);
         var parameters = new DynamicParameters();
         parameters.Add("name", name);
         

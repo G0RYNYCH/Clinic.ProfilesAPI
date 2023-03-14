@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  profilesapi:
+    image: profileapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DbConnection=server=sql_server2022; database=Profiles; User Id=sa; Password=Password123!; Integrated Security=false; Encrypt=false; TrustServerCertificate=True
+      - ConnectionStrings__MasterDbConnection=server=sql_server2022; database=master; User Id=sa; Password=Password123!; Integrated Security=false; Encrypt=false; TrustServerCertificate=True
+    ports:
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    ports:
+      - "1433:1433"
+    environment:
+      MSSQL_SA_PASSWORD: "Password123!"
+      SA_PASSWORD: "Password123!"
+      ACCEPT_EULA: "Y"
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "Password123!", "-Q", "select 1" ]
