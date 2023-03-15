@@ -18,6 +18,6 @@ RUN dotnet publish "ProfilesAPI.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY wait_for_database.sh .
+#COPY wait_for_database.sh .
 #ENTRYPOINT ["sh", "wait_for_database.sh", "db:1433", "-t", "120", "--", "dotnet", "ProfilesAPI.dll"]
 ENTRYPOINT ["dotnet", "ProfilesAPI.dll"]

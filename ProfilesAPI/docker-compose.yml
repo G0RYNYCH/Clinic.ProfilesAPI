@@ -12,7 +12,7 @@ services:
       - ConnectionStrings__DbConnection=server=sql_server2022; database=Profiles; User Id=sa; Password=Password123!; Integrated Security=false; Encrypt=false; TrustServerCertificate=True
       - ConnectionStrings__MasterDbConnection=server=sql_server2022; database=master; User Id=sa; Password=Password123!; Integrated Security=false; Encrypt=false; TrustServerCertificate=True
     ports:
-      - "8080:80"
+      - "5116:80"
     depends_on:
       db:
         condition: service_healthy
