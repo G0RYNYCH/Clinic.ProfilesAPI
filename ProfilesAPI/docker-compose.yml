@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ConnectionStrings__DbConnection=server=sql_server2022; database=Profiles; User Id=sa; Password=Password123!; Integrated Security=false; Encrypt=false; TrustServerCertificate=True
       - ConnectionStrings__MasterDbConnection=server=sql_server2022; database=master; User Id=sa; Password=Password123!; Integrated Security=false; Encrypt=false; TrustServerCertificate=True
     ports:

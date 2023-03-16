@@ -6,7 +6,7 @@ namespace ProfilesAPI.Models;
 [ExcludeFromCodeCoverage]
 public class Doctor : EntityBase
 {
-    public DateOnly DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 
     public Guid SpeciallizationId { get; set; }
 

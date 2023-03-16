@@ -7,5 +7,5 @@ public class Patient : EntityBase
 {
     public bool IsLinkedToAccount { get; set; }
 
-    public DateOnly DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 }

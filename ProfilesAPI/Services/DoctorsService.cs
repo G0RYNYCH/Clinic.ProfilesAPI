@@ -34,7 +34,7 @@ public class DoctorsService :
         doctor.SpeciallizationId = Guid.NewGuid();// = dto.SpeciallizationId;
         doctor.OfficeId = Guid.NewGuid();//fetch from httpClient 
         doctor.AccountId = Guid.NewGuid();//fetch from httpClient 
-        if (IsSpecializationExists(dto.SpeciallizationId, cancellationToken).Result)
+        if (!IsSpecializationExists(dto.SpeciallizationId, cancellationToken).Result)
             throw new KeyNotFoundException($"Specialization with Id: {dto.SpeciallizationId} not found");
         await _repositoryBase.CreateAsync(doctor, cancellationToken);
         

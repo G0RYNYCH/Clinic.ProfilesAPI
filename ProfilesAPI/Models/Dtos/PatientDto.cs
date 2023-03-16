@@ -11,5 +11,5 @@ public class PatientDto
 
     public string? MiddleName { get; set; }
     
-    public DateOnly DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 }
