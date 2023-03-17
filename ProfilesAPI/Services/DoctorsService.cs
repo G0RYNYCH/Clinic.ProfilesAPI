@@ -31,7 +31,7 @@ public class DoctorsService :
     {
         var doctor = _mapper.Map<DoctorDto, Doctor>(dto);
         doctor.Id = Guid.NewGuid();
-        doctor.SpeciallizationId = Guid.NewGuid();// = dto.SpeciallizationId;
+        //doctor.SpeciallizationId = Guid.NewGuid();// = dto.SpeciallizationId;
         doctor.OfficeId = Guid.NewGuid();//fetch from httpClient 
         doctor.AccountId = Guid.NewGuid();//fetch from httpClient 
         if (!IsSpecializationExists(dto.SpeciallizationId, cancellationToken).Result)
