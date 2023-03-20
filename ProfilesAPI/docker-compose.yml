@@ -16,6 +16,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - clinic_network
   
   db:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
@@ -28,3 +30,9 @@ services:
       ACCEPT_EULA: "Y"
     healthcheck:
       test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "Password123!", "-Q", "select 1" ]
+    networks:
+      - clinic_network
+      
+networks:
+  clinic_network:
+    external: true
